@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://mpglpostgresql.postgres.database.azure.com:5432/flight_inventory"
+    username: "ayoubElmahjoubi"
+    password: "waktir-wubxij-Hamvi2"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: localhost
+    port: 1025
+    username: ayoub
+    password: ayoub
+    properties:
+       mail:
+         smtp:
+           trust: "*"
+         auth: true
+         starttls:
+           enable: true
+         connexiontimeout: 5000
+         timeout: 3000
+         writetimeout: 5000
+
+  application:
+    security:
+      jwt:
+        secret-key: 27AD1A8F93C12566312491C5E77BE
+        expiration: 8640000
+    mailing:
+      frontend:
+        activation-url: http://localhost:3000/activate-account
+server:
+  port: 8088
