@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import io.jsonwebtoken.SignatureAlgorithm;
+import javax.crypto.SecretKey;
+
 
 import java.security.Key;
 import java.util.Date;
@@ -46,13 +49,13 @@ public class JwtService {
 
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken( new HashMap<>() , userDetails);
+        return generateToken(new HashMap<>() , userDetails);
     }
-    private String generateToken(HashMap<String , Objects> claims , UserDetails userDetails) {
+    public String generateToken(HashMap<String , Object> claims , UserDetails userDetails) {
         return buildToken(claims, userDetails , jwtExpiration);
     }
 
-    private String buildToken(HashMap<String, Objects> extraClaims,
+    private String buildToken(HashMap<String, Object> extraClaims,
                               UserDetails userDetails,
                               Long jwtExpiration
     ) {
@@ -85,8 +88,11 @@ public class JwtService {
         return extractClaim(token , Claims::getExpiration);
     }
 
-    private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
+//    private Key getSignKey() {
+//        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+//        return Keys.hmacShaKeyFor(keyBytes);
+//    }
+    private SecretKey getSignKey() {
+        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 }
