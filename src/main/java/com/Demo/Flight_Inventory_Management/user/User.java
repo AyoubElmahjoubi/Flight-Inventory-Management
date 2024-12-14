@@ -1,5 +1,7 @@
 package com.Demo.Flight_Inventory_Management.user;
 
+import com.Demo.Flight_Inventory_Management.bookingFlight.Booking;
+import com.Demo.Flight_Inventory_Management.history.BookingTransactionHistory;
 import com.Demo.Flight_Inventory_Management.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,6 +50,11 @@ public class User implements UserDetails, Principal {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+    @OneToMany(mappedBy = "bookedBy", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookingTransactionHistory> histories ;
 
     @Override
     public String getName() {
@@ -89,4 +96,5 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
     public String fullName() {return firstname + " " + lastname;}
+
 }
