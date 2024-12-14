@@ -18,7 +18,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-
 public class EmailService {
 
     private final JavaMailSender mailSender;
