@@ -5,8 +5,10 @@ import com.Demo.Flight_Inventory_Management.airport.Airport;
 import com.Demo.Flight_Inventory_Management.bookingFlight.Booking;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -32,6 +34,10 @@ public class Flight {
     private Airport arrivalTo;
     @OneToMany( mappedBy = "flight", fetch = FetchType.LAZY)
     private Collection<Seat> flight_available_seats;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdDate;
 
     @OneToOne
     @JoinColumn(name = "airplane")

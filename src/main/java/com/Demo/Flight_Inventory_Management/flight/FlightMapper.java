@@ -5,6 +5,9 @@ import com.Demo.Flight_Inventory_Management.airplane.Airplane;
 import com.Demo.Flight_Inventory_Management.airport.Airport;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Service
 public class FlightMapper {
 
@@ -19,6 +22,20 @@ public class FlightMapper {
                 .airplane(airplane)
                 .basePrice(request.basePrice())
                 .status(FlightStatus.AVAILABLE)
+                .createdDate(LocalDateTime.now())
+                .build();
+    }
+
+    public FlightResponse toFlightResponse(Flight flight) {
+        return FlightResponse.builder()
+                .flight_id(flight.getFlight_id())
+                .flightNumber(flight.getFlightNumber())
+                .flight_departure(flight.getFlight_departure())
+                .flight_arrival(flight.getFlight_arrival())
+                .basePrice(flight.getBasePrice())
+                .status(String.valueOf(flight.getStatus()))
+                .departureFrom(flight.getDepartureFrom().getAirport_name())
+                .arrivalTo(flight.getArrivalTo().getAirport_name())
                 .build();
     }
 }
