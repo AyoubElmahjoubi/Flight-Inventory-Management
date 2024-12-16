@@ -14,4 +14,13 @@ public class AirplaneMapper {
                 .dateFabrication(request.dateFabrication())
                 .build();
     }
+
+    public AirplaneResponse toAirplaneResponse(Airplane airplane) {
+        return AirplaneResponse.builder()
+                .airplane_id(airplane.getAirplane_id())
+                .model(airplane.getModel())
+                .capacity(airplane.getCapacity())
+                .dateFabrication(airplane.getDateFabrication())
+                .build();
+    }
 }
