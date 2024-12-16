@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -42,9 +43,17 @@ public class SecurityConfig {
                                 "/configuration/security",
                                 "/swagger-ui/**",
                                 "/webjars/**",
-                                "swagger-ui.hml"
+                                "swagger-ui.html"
 
                         ).permitAll()
+                                .requestMatchers(
+                                        "api/v1/admin/register-admin",
+                                        "api/v1/airplane/**",
+                                        "api/v1/airport/**",
+                                        "api/v1/flights/add-Flight",
+                                        "api/v1/flights/delete/**",
+                                        "api/v1/flights/all-flights"
+                                ).hasAuthority("ADMIN")
                                 .anyRequest()
                                     .authenticated()
 
@@ -54,4 +63,10 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter , UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
+
+
 }
+
+

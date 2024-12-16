@@ -4,6 +4,7 @@ package com.Demo.Flight_Inventory_Management.email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-
 public class EmailService {
+
 
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
