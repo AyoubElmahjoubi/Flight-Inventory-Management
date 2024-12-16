@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookingFlightController {
 
     private final BookingFlightService service ;
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping
     public ResponseEntity<Long> saveBooking(
             @Valid @RequestBody BookingRequest request ,
