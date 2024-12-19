@@ -16,9 +16,15 @@ public record BookingRequest(
         @NotEmpty(message = "101")
         String passengerLastName,
 
+        String cardId,
+
+        String passportId,
+
         @NotNull(message = "102")
         @NotEmpty(message = "102")
         String passengerEmail,
+
+        String phoneNumber,
 
         @NotNull
         @NotEmpty
@@ -27,5 +33,10 @@ public record BookingRequest(
         @NotNull(message = "108")
         @NotEmpty(message = "108")
         int numberOfSeats
+
+
+
+
+
 ) {
 }

@@ -3,6 +3,8 @@ package com.Demo.Flight_Inventory_Management.airplane;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AirplaneMapper {
 
@@ -12,6 +14,7 @@ public class AirplaneMapper {
                 .model(request.model())
                 .capacity(request.capacity())
                 .dateFabrication(request.dateFabrication())
+                .createdDate(LocalDateTime.now())
                 .build();
     }
 

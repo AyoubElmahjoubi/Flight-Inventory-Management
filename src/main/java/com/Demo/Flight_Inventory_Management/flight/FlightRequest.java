@@ -2,6 +2,7 @@ package com.Demo.Flight_Inventory_Management.flight;
 
 import com.Demo.Flight_Inventory_Management.airplane.Airplane;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -41,7 +42,22 @@ public record FlightRequest(
 
     @NotEmpty(message = "117")
     @NotNull(message = "117")
-    Long airplaneId
+    Long airplaneId,
+
+    String flightClass,
+
+    String flightEscale,
+
+    String program,
+
+    @NotEmpty(message = "118")
+    @NotNull(message = "118")
+    double bagageCapacity,
+
+    @NotEmpty(message = "120")
+    @NotNull(message = "120")
+    double CabinCapacity
+
 
 ) {
 }

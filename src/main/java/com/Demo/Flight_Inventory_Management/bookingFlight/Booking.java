@@ -28,6 +28,9 @@ public class Booking {
     private String passengerFirstName;
     private String passengerLastName;
     private String passengerEmail;
+    private String passengerPhone;
+    private String passengerIdentityId ;
+    private String passengerPassportId;
     private Date bookingDate;
 
     @Enumerated(EnumType.STRING)

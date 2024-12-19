@@ -22,5 +22,10 @@ public class FlightResponse {
     private double basePrice;
     private String departureFrom;
     private String arrivalTo;
+    private String flightClass;
+    private String flightEscale;
+    private String program;
+    private double bagageCapacity;
+    private double CabinCapacity;
 
 }
