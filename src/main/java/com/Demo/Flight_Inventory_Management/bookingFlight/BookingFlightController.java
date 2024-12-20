@@ -28,5 +28,18 @@ public class BookingFlightController {
         return ResponseEntity.ok(service.saveBooking(request,connectedUser));
     }
 
+    @PostMapping("/confirm-payment")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public ResponseEntity<String> confirmPayment(
+            @Valid @RequestBody PaymentRequest paymentRequest,
+            Authentication connectedUser
+    ) {
+        boolean paymentSuccess = service.processPayment(paymentRequest, connectedUser);
+        if (paymentSuccess) {
+            return ResponseEntity.ok("Payment confirmed and booking updated!");
+        } else {
+            return ResponseEntity.badRequest().body("Payment failed!");
+        }
+    }
 
 }

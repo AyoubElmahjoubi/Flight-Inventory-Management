@@ -24,11 +24,11 @@ public class Flight {
     private String flightNumber;
     @Enumerated(EnumType.STRING)
     private FlightStatus status ;
-    @Temporal(TemporalType.DATE)
-    private LocalDate flight_departure;
+
+    private LocalDateTime flight_departure;
     private double basePrice;
-    @Temporal(TemporalType.DATE)
-    private LocalDate flight_arrival;
+
+    private LocalDateTime flight_arrival;
     @OneToOne()
     private Airport departureFrom;
     @OneToOne()

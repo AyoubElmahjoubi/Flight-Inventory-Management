@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record FlightRequest(
 
@@ -16,13 +17,13 @@ public record FlightRequest(
 
     @NotEmpty(message = "111")
     @NotNull(message = "111")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-d")
-    LocalDate departureTime,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    LocalDateTime departureTime,
 
     @NotEmpty(message = "112")
     @NotNull(message = "112")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-d")
-    LocalDate arrivalTime,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    LocalDateTime arrivalTime,
 
     @NotEmpty(message = "113")
     @NotNull(message = "113")
