@@ -1,6 +1,5 @@
 package com.Demo.Flight_Inventory_Management.bookingFlight;
 
-import com.Demo.Flight_Inventory_Management.airport.Airport;
 import com.Demo.Flight_Inventory_Management.flight.Flight;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +22,14 @@ public class BookingMapper {
                 .flight(flight)
                 .bookingDate(new Date())
                 .status(BookingStatus.EN_ATTENTE)
+                .build();
+    }
+
+    public BookingResponse tobookingResponse(Booking booking) {
+        return BookingResponse.builder()
+                .bookingId(booking.getBookingId())
+                .passengerName(booking.getPassengerFirstName())
+                .passengerEmail(booking.getPassengerEmail())
                 .build();
     }
 }

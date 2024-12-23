@@ -1,16 +1,22 @@
 package com.Demo.Flight_Inventory_Management.bookingFlight;
 
+import com.Demo.Flight_Inventory_Management.commonEntity.PageResponse;
 import com.Demo.Flight_Inventory_Management.email.EmailService;
 import com.Demo.Flight_Inventory_Management.flight.Flight;
 import com.Demo.Flight_Inventory_Management.flight.FlightRepo;
+import com.Demo.Flight_Inventory_Management.flight.FlightResponse;
 import com.Demo.Flight_Inventory_Management.user.User;
 import jakarta.mail.MessagingException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +72,24 @@ public class BookingFlightService {
 
     private boolean fakePaymentProcess(PaymentRequest paymentRequest) {
         return true;
+    }
+
+    public PageResponse<BookingResponse> findAllBooking(int page, int size, Authentication connectedUser) {
+        User user = ((User) connectedUser.getPrincipal());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("bookingDate").descending());
+        Page<Booking> bookings = bookingRepo.findAll(pageable);
+        List<BookingResponse> bookingResponse = bookings.stream()
+                .map(bookingMapper::tobookingResponse)
+                .toList();
+
+        return new PageResponse<>(
+                bookingResponse,
+                bookings.getNumber(),
+                bookings.getSize(),
+                bookings.getTotalElements(),
+                bookings.getTotalPages(),
+                bookings.isFirst(),
+                bookings.isLast()
+        );
     }
 }
